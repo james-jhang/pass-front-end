@@ -1859,6 +1859,30 @@ body > .navbar-collapse[data-color="purple"]:after {
   text-align: center;
   padding: 3px; }
 
+.box-shadow-effects {
+  -webkit-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+
+.box-shadow-effects::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  -webkit-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+
+.box-shadow-effects:hover {
+  -webkit-transform: scale(1.005, 1.005);
+  transform: scale(1.005, 1.005); }
+
+.box-shadow-effects:hover::after {
+  opacity: 1; }
+
 .card-course .footer,
 .card-price .footer {
   padding: 5px 15px 10px; }
