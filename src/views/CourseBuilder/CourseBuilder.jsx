@@ -1,19 +1,9 @@
 
 import React, { Component } from 'react';
-import {Table, Col,FormGroup,ControlLabel,FormControl,Form,ToggleButtonGroup,ToggleButton} from 'react-bootstrap';
+import {Table, Col, FormGroup, ControlLabel, FormControl, Form, Row} from 'react-bootstrap';
 import {thWeekArray} from 'variables/Variables.jsx';
 import Button from 'elements/CustomButton/CustomButton.jsx'
-
-const ParentComponent = props => (
-  <div className="inlineForm">
-    <div id="children-pane" style={{width:'1000px', height:'300px', overflow:'scroll', marginLeft:'5.25%', marginBottom:'3%', overflowX:'auto'}}>
-      {props.children}
-    </div>
-    <Button onClick={props.addChild} style={props.style}>Add Student</Button>    
-  </div>
-);
-
-
+import {Card} from 'components/Card/Card.jsx';
 
 class CourseBuilder extends Component {
   state = {
@@ -28,10 +18,9 @@ class CourseBuilder extends Component {
   }
   render(){
     const children = [];
-    
     for (var i = 0; i < this.state.numChildren; i += 1) {
         children.push(
-            <Form inline key={i} style={{marginLeft:'5.25%', marginBottom:'3%'}}>
+            <Form inline key={i}>
                 <FormGroup controlId="formInlineName">
                     <ControlLabel>Student ID </ControlLabel>
                     {''}
@@ -53,63 +42,71 @@ class CourseBuilder extends Component {
     return(
       <div className="content">
         <div className="container-fluid">
-          <div className="card card-user">
-            <br/>
-            <div className="row">
-              <Form horizontal>
-                <FormGroup controlId="formHorizontalEmail">
-                  <Col componentClass={ControlLabel} sm={2}>
-                    <h5>Course Name</h5>
+          <Card
+            content={
+              <div>
+                <Row style={{borderWidth: '1px', borderStyle: 'dashed', display: 'flex'}}>
+                  <Col sm={8}>
+                    <Form>
+                      <FormGroup controlId="courseName">
+                        <ControlLabel>Course Name</ControlLabel>
+                        <FormControl type="text" label="Text" placeholder="Course Name" />
+                      </FormGroup>
+                      <FormGroup controlId="courseTimePicker">
+                        <ControlLabel>Course time</ControlLabel>
+                        <Table responsive bordered striped hover>
+                          <thead>
+                            <tr>
+                              {
+                                thWeekArray.map((prop, key) => {
+                                  return (
+                                    <th style={{textAlign: 'center'}} key={key}>{prop}</th>
+                                  )
+                                })
+                              }
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {
+                              [1,2,3,4,0,5,6,7,8,9].map((rowProp,rowKey)=>{
+                                return(
+                                  <tr key={rowKey}>{           
+                                    [1,2,3,4,5].map((prop, colKey) => {
+                                      if(rowProp === 0) return (<td key={colKey}><hr key={colKey} style={{borderWidth: '1px'}}/></td>)
+                                      return (
+                                        <td key={colKey} style={{marginLeft:'0px'}}>
+                                          <Button simple key={colKey} style={{marginLeft:'0px',width:'100%'}} onClick={Choose}>{rowProp}</Button>
+                                        </td>
+                                      );
+                                    })
+                                  }
+                                  </tr>                          
+                                )
+                              })
+                            }
+                          </tbody>
+                        </Table>
+                      </FormGroup>
+                    </Form>
                   </Col>
-                  <Col sm={5}>
-                    <FormControl type="text" placeholder="Course Name" />
+                  <Col sm={4} style={{borderWidth: '1px', borderStyle: 'dashed'}}>
+                    <Form>
+                      <FormGroup controlId="courseStudent">
+                        <ControlLabel>Course student</ControlLabel>
+                          <div id="children-pane" style={{width:'100%', maxHeight:'65%',  overflow:'scroll', overflowX: 'hidden',borderWidth: '1px', borderStyle: 'dashed'}}>
+                            {children}
+                          </div>
+                      </FormGroup>
+                    </Form>
+                    <div style={{position: 'absolute', bottom: '1em', right: '1em', left: '1em'}}>
+                      <Button bsSize="large" onClick={this.onAddChild} block>Add Student</Button>
+                      <Button bsSize="large" block>Save</Button>
+                    </div>
                   </Col>
-                </FormGroup>
-              </Form>
-            </div>
-            <div className="row card" style={{width: '80%',marginLeft: '50px'}}>
-                <Table striped hover style={{tableLayout: 'fixed',width:'100% '}}>
-                  <thead>
-                    <tr>
-                      {
-                        thWeekArray.map((prop, key) => {
-                          return (
-                            <th style={{textAlign: 'center'}} key={key}>{prop}</th>
-                          )
-                        })
-                      }
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {
-                    [1,2,3,4,0,5,6,7,8,9].map((rowProp,rowKey)=>{
-                      return(
-                        <tr key={rowKey}>{           
-                          [1,2,3,4,5].map((prop, colKey) => {
-                            if(rowProp === 0)return (<td key={colKey}><hr key={colKey} style={{borderWidth: '1px'}}/></td>)
-                            return (
-                              <td key={colKey} style={{marginLeft:'0px'}}>
-                              <Button simple key={colKey} style={{marginLeft:'0px',width:'100%'}} onClick={Choose}>{rowProp}</Button>
-                              </td>
-                            );
-                          })
-                        }
-                        </tr>                          
-                      )
-                    })
-                  }
-                  </tbody>
-                </Table>
-            </div>
-            <div className="row">
-                <ParentComponent style={{marginLeft:'5.25%', marginBottom:'3%'}} addChild={this.onAddChild}>
-                 {children}
-                </ParentComponent>
-            </div>
-            <div className="row">
-            <Button style={{marginLeft:'75%', marginBottom:'3%'}}>Save</Button>
-            </div>
-          </div>
+                </Row>
+              </div>
+            }
+          />
         </div>
       </div>
       
