@@ -1,55 +1,74 @@
 
 import React, { Component } from 'react';
-import {Table, Col,FormGroup,ControlLabel,FormControl,Form,ToggleButton,ToggleButtonGroup} from 'react-bootstrap';
+import {Table, Col,FormGroup,ControlLabel,FormControl,Form,ToggleButtonGroup,ToggleButton} from 'react-bootstrap';
 import {thWeekArray} from 'variables/Variables.jsx';
+import Button from 'elements/CustomButton/CustomButton.jsx'
+
+const ParentComponent = props => (
+  <div className="inlineForm">
+    <div id="children-pane" style={{width:'1000px', height:'300px', overflow:'scroll', marginLeft:'5.25%', marginBottom:'3%', overflowX:'auto'}}>
+      {props.children}
+    </div>
+    <Button onClick={props.addChild} style={props.style}>Add Student</Button>    
+  </div>
+);
 
 
 
 class CourseBuilder extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      value: [1, 3],
-    };
+  state = {
+    numChildren: 0
   }
-
-  onChange = (value) => {
-    this.setState({ value });
-  };
-
+  onAddChild = () => {
+      this.setState({
+      numChildren: this.state.numChildren + 1
+      });
+      var ScrollToBottom = document.getElementById("children-pane");
+      ScrollToBottom.scrollTop = ScrollToBottom.scrollHeight;
+  }
   render(){
-     function classTable(){
-      var weekDay=[1,2,3,4,5];
-      var classcount=[1,2,3,4,5,6,7,8,9];
-
-      return weekDay.map((weekValue, rowkey) => {
-         return classcount.map((classValue, rowkey) =>{
-            return weekValue.toString() + classValue.toString()
-        })
-      })
+    const children = [];
+    
+    for (var i = 0; i < this.state.numChildren; i += 1) {
+        children.push(
+            <Form inline key={i} style={{marginLeft:'5.25%', marginBottom:'3%'}}>
+                <FormGroup controlId="formInlineName">
+                    <ControlLabel>Student ID </ControlLabel>
+                    {''}
+                    <FormControl type="text" style={{marginLeft:'1%'}} />
+                </FormGroup>
+                {''}
+            </Form>
+        );
+    };
+    function Choose(e) {
+        e.preventDefault();
+        console.log(e.target.style.background)
+        if(e.target.style.background==='rgb(235, 237, 227)'){
+          e.target.style.background='transparent'
+          return
+        }
+        e.target.style.background='#ebede3'
     }
     return(
-     
       <div className="content">
         <div className="container-fluid">
           <div className="card card-user">
             <br/>
             <div className="row">
               <Form horizontal>
-              <FormGroup controlId="formHorizontalEmail">
-                <Col componentClass={ControlLabel} sm={2}>
-                  <h5>Course Name</h5>
-                </Col>
-                <Col sm={5}>
-                  <FormControl type="text" placeholder="Course Name" />
-                </Col>
-              </FormGroup>
+                <FormGroup controlId="formHorizontalEmail">
+                  <Col componentClass={ControlLabel} sm={2}>
+                    <h5>Course Name</h5>
+                  </Col>
+                  <Col sm={5}>
+                    <FormControl type="text" placeholder="Course Name" />
+                  </Col>
+                </FormGroup>
               </Form>
             </div>
-            <div className="row">
-              <Col sm={8}>
-                <Table style={{textAlign: 'center'}}  striped hover>
+            <div className="row card" style={{width: '80%',marginLeft: '50px'}}>
+                <Table striped hover style={{tableLayout: 'fixed',width:'100% '}}>
                   <thead>
                     <tr>
                       {
@@ -62,89 +81,33 @@ class CourseBuilder extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {
-                     
-                    }
+                  {
+                    [1,2,3,4,0,5,6,7,8,9].map((rowProp,rowKey)=>{
+                      return(
+                        <tr key={rowKey}>{           
+                          [1,2,3,4,5].map((prop, colKey) => {
+                            if(rowProp === 0)return (<td key={colKey}><hr key={colKey} style={{borderWidth: '1px'}}/></td>)
+                            return (
+                              <td key={colKey} style={{marginLeft:'0px'}}>
+                              <Button simple key={colKey} style={{marginLeft:'0px',width:'100%'}} onClick={Choose}>{rowProp}</Button>
+                              </td>
+                            );
+                          })
+                        }
+                        </tr>                          
+                      )
+                    })
+                  }
                   </tbody>
                 </Table>
-                <ToggleButtonGroup
-                  type="checkbox"
-                  value={this.state.value}
-                  onChange={this.onChange}
-                > 
-                  <ToggleButtonGroup type="checkbox" style={{marginBottom: '-6px'}}>
-                    <ToggleButton value={11}>1</ToggleButton>
-                    <ToggleButton value={21}>1</ToggleButton>
-                    <ToggleButton value={31}>1</ToggleButton>
-                    <ToggleButton value={41}>1</ToggleButton>
-                    <ToggleButton value={51}>1</ToggleButton>                    
-                  </ToggleButtonGroup>
-                  <br/>
-                  <ToggleButtonGroup type="checkbox" style={{marginBottom: '-6px'}}>
-                    <ToggleButton value={12}>2</ToggleButton>
-                    <ToggleButton value={22}>2</ToggleButton>
-                    <ToggleButton value={32}>2</ToggleButton>
-                    <ToggleButton value={42}>2</ToggleButton>
-                    <ToggleButton value={52}>2</ToggleButton>    
-                  </ToggleButtonGroup>
-                  <br/>
-                  
-                  <ToggleButtonGroup type="checkbox" style={{marginBottom: '-6px'}}>
-                    <ToggleButton value={13}>3</ToggleButton>
-                    <ToggleButton value={23}>3</ToggleButton>
-                    <ToggleButton value={33}>3</ToggleButton>
-                    <ToggleButton value={43}>3</ToggleButton>
-                    <ToggleButton value={53}>3</ToggleButton>                    
-                  </ToggleButtonGroup>
-                  <br/>
-                  
-                  <ToggleButtonGroup type="checkbox" style={{marginBottom: '-6px'}}>
-                    <ToggleButton value={14}>4</ToggleButton>
-                    <ToggleButton value={24}>4</ToggleButton>
-                    <ToggleButton value={34}>4</ToggleButton>
-                    <ToggleButton value={44}>4</ToggleButton>
-                    <ToggleButton value={54}>4</ToggleButton>                    
-                  </ToggleButtonGroup>
-                  <br/>
-                  
-                  <ToggleButtonGroup type="checkbox" style={{marginBottom: '-6px'}}>
-                    <ToggleButton value={15}>5</ToggleButton>
-                    <ToggleButton value={25}>5</ToggleButton>
-                    <ToggleButton value={35}>5</ToggleButton>
-                    <ToggleButton value={45}>5</ToggleButton>
-                    <ToggleButton value={55}>5</ToggleButton>                    
-                  </ToggleButtonGroup>
-                  <br/>
-                  
-                  <ToggleButtonGroup type="checkbox" style={{marginBottom: '-6px'}}>
-                    <ToggleButton value={16}>6</ToggleButton>
-                    <ToggleButton value={26}>6</ToggleButton>
-                    <ToggleButton value={36}>6</ToggleButton>
-                    <ToggleButton value={46}>6</ToggleButton>
-                    <ToggleButton value={56}>6</ToggleButton>                    
-                  </ToggleButtonGroup>
-                  <br/>
-                  
-                  <ToggleButtonGroup type="checkbox" style={{marginBottom: '-6px'}}>
-                    <ToggleButton value={17}>7</ToggleButton>
-                    <ToggleButton value={27}>7</ToggleButton>
-                    <ToggleButton value={37}>7</ToggleButton>
-                    <ToggleButton value={47}>7</ToggleButton>
-                    <ToggleButton value={57}>7</ToggleButton>                    
-                  </ToggleButtonGroup>
-                  <br/>
-                  
-                  <ToggleButtonGroup type="checkbox" style={{marginBottom: '-6px'}}>
-                    <ToggleButton value={18}>8</ToggleButton>
-                    <ToggleButton value={28}>8</ToggleButton>
-                    <ToggleButton value={38}>8</ToggleButton>
-                    <ToggleButton value={48}>8</ToggleButton>
-                    <ToggleButton value={58}>8</ToggleButton>                    
-                  </ToggleButtonGroup>
-                </ToggleButtonGroup>
-              </Col>
             </div>
             <div className="row">
+                <ParentComponent style={{marginLeft:'5.25%', marginBottom:'3%'}} addChild={this.onAddChild}>
+                 {children}
+                </ParentComponent>
+            </div>
+            <div className="row">
+            <Button style={{marginLeft:'75%', marginBottom:'3%'}}>Save</Button>
             </div>
           </div>
         </div>
