@@ -57,13 +57,13 @@ var course = [
         score: '72'
       },
       {
-        assignment: 'PEP',
+        assignment: 'Project Execution Plan',
         dueDate: '2017/10/23',
         status: 'v-sub',
         score: ''
       },
       {
-        assignment: 'SRS',
+        assignment: 'Software Requirements Specification',
         dueDate: '2017/10/30',
         status: 'x-sub',
         score: ''
@@ -71,7 +71,7 @@ var course = [
     ]
   },
   {
-    courseName: 'Pattern-Oriented Software Design',
+    courseName: 'Object-Oriented Analysis and Design',
     teacher_ch: '陳偉凱 教授',
     teacher_en: 'Professor Woei-Kae Chen',
     courseWebsite: 'http://www.cc.ntut.edu.tw/~wkchen/',
@@ -91,6 +91,61 @@ var course = [
       }
     ]
   }
+]
+
+//
+// //
+// // // For accountManager
+// //
+//
+
+const thWeekArray = ['Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.'];
+
+const thUserArray = ["account ID","Name","e-mail" ,"Role"];
+const tdUserArray = [
+  {
+    accountId : '105598047',
+    name : '張建發',
+    email : 'iamFaGay@gmail.com',
+    role : 'Teaching Assistant'
+  },
+  {
+    accountId : '106598054',
+    name : '楊子冊',
+    email : 'mazigo@gmail.com',
+    role : 'Student'
+  },
+  {
+    accountId : '105598067',
+    name : '連又瑩',
+    email : 'clrclrclr@gmail.com',
+    role : 'Student'
+  },
+  {
+    accountId : '105598055',
+    name : '黃偉宸',
+    email : '105598055@gmail.com',
+    role : 'Student'
+  },
+  {
+    accountId : '124589505',
+    name : 'YC Cheng',
+    email : 'YC_Cheng@gmail.com',
+    role : 'Instructor'
+  },
+];
+
+//
+// //
+// // // For assignment
+// //
+//
+var hwHeader = ["Student ID", "Name", "File", "Score"]
+var hw1 = [
+    ["105598067", "連又瑩", "HW1"],
+    ["105598067", "張建發", "HW1"],
+    ["105598067", "黃偉宸", "HW1"],
+    ["105598067", "楊子冊", "HW1"]
 ]
 
 //
@@ -651,8 +706,11 @@ var legendBar = {
 
 module.exports = {
     course,
+    thWeekArray,
+    hwHeader, hw1,
     style, // For notifications (App container and Notifications view)
     thArray, tdArray, // For tables (TableList view)
+    thUserArray,tdUserArray,// For User Table
     iconsArray, // For icons (Icons view)
     dataPie, legendPie, dataSales, optionsSales, responsiveSales, legendSales, dataBar, optionsBar, responsiveBar, legendBar // For charts (Dashboard view)
 };

@@ -4,14 +4,14 @@ import { NavItem, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 
 class HeaderLinks extends Component{
     render(){
-        const notification = (
-            <div>
-                <i className="fa fa-globe"></i>
-                <b className="caret"></b>
-                <span className="notification">5</span>
-                <p className="hidden-lg hidden-md">Notification</p>
-            </div>
-        );
+        // const notification = (
+        //     <div>
+        //         <i className="fa fa-globe"></i>
+        //         <b className="caret"></b>
+        //         <span className="notification">5</span>
+        //         <p className="hidden-lg hidden-md">Notification</p>
+        //     </div>
+        // );
         return (
             <div>
                 <Nav>
@@ -32,7 +32,6 @@ class HeaderLinks extends Component{
                     </NavItem> */}
                 </Nav>
                 <Nav pullRight>
-                    <NavItem eventKey={1} href="#">Account</NavItem>
                     <NavDropdown eventKey={2} title="Dropdown" id="basic-nav-dropdown-right">
                         <MenuItem eventKey={2.1}>Action</MenuItem>
                         <MenuItem eventKey={2.2}>Another action</MenuItem>

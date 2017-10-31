@@ -6,7 +6,7 @@ class Footer extends Component {
 		return (
             <footer className="footer">
                 <div className="container-fluid">
-                    <nav className="pull-left">
+                    {/* <nav className="pull-left">
                         <ul>
                             <li>
                                 <a href="#pablo">
@@ -29,9 +29,9 @@ class Footer extends Component {
                                 </a>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> */}
                     <p className="copyright pull-right">
-                        &copy; {(new Date()).getFullYear()} <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                        &copy; {(new Date()).getFullYear()} <a href="http://lbd-react.creative-tim.com/?_ga=2.202273938.2036390166.1509098139-2058117058.1509098139#/dashboard">Creative Tim</a>, made with love for a better web
                     </p>
                 </div>
             </footer>

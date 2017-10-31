@@ -883,6 +883,17 @@ body > .navbar-collapse[data-color="purple"]:after {
 .input-group-focus .input-group-addon {
   border-color: #9A9A9A; }
 
+.upload-btn-wrapper {
+  position: relative;
+  display: inline-block; }
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0; }
+
 .alert {
   border: 0;
   border-radius: 0;
@@ -1567,6 +1578,9 @@ body > .navbar-collapse[data-color="purple"]:after {
   .footer:not(.footer-big) nav > ul a {
     padding: 10px 0px;
     margin: 10px 10px 10px 0px; }
+
+.custom-modal-width {
+  width: 20%; }
 
 .dropdown-menu {
   visibility: hidden;

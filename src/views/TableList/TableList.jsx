@@ -14,7 +14,7 @@ class TableList extends Component {
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this.tableHeaders = [...thArray];
-    this.tableHeaders = [...course[1].assignments];
+    this.assignments = [...course[1].assignments];
   }
 
   close() {
@@ -32,7 +32,8 @@ class TableList extends Component {
             <SubmitModal 
               show={this.state.showModal}
               onHide={this.close}
-              title
+              title={this.assignments[3].assignment}
+              dueDate={this.assignments[3].dueDate}
             />
             <div className="col-md-12">
               <Card
@@ -54,7 +55,7 @@ class TableList extends Component {
                     </thead>
                     <tbody>
                       {
-                        course[1].assignments.map((prop, rowKey) => {
+                        this.assignments.map((prop, rowKey) => {
                           var _prop = [...Object.values(prop)]
                           _prop.unshift(rowKey + 1)
                           return (

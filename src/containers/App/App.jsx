@@ -11,8 +11,12 @@ import UserProfile from 'views/UserProfile/UserProfile';
 import TableList from 'views/TableList/TableList';
 import Typography from 'views/Typography/Typography';
 import Icons from 'views/Icons/Icons';
-import Maps from 'views/Maps/Maps';
 import Notifications from 'views/Notifications/Notifications';
+import AccountManager from 'views/AccountManager/AccountManager';
+import Assignments from 'views/Assignments/Assignments';
+import Grading from 'views/Assignments/Grading';
+import CourseBuilder from 'views/CourseBuilder/CourseBuilder';
+
 
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
@@ -60,7 +64,6 @@ class App extends Component {
   }
   render() {
     return (
-
       <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style}/>
         <Sidebar {...this.props} />
@@ -71,18 +74,19 @@ class App extends Component {
               <Route path="/dashboard" component={Dashboard}/>
               <Route path="/user" component={UserProfile}/>
               <Route path="/table" component={TableList}/>
+              <Route path="/accounts" component={AccountManager}/>
+              <Route path="/assignments" component={Assignments}/>
+              <Route path="/grading" component={Grading}/>
               <Route path="/typography" component={Typography}/>
               <Route path="/icons" component={Icons}/>
-              <Route path="/maps" component={Maps}/>
               <Route path="/notifications" component={Notifications}/>
+              <Route path="/newcourse" component={CourseBuilder}/>
               <Redirect from="/" to="/dashboard"/>
             </Switch>
 
           <Footer />
         </div>
       </div>
-
-
     );
   }
 }
