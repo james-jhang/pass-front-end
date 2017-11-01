@@ -46,10 +46,10 @@ class AccountManager extends Component {
     return (
       <div className="content">
         <div className="container-fluid">
-        <Modal show={this.state.showModal} onHide={this.close} dialogClassName="custom-modal-width">
+          <Modal show={this.state.showModal} onHide={this.close} dialogClassName="custom-modal-width">
             <Modal.Header closeButton>
               <Modal.Title style={{textAlign: 'center'}}>
-                <i style={{fontSize: '40px'}} className="pe-7s-add-user"></i>
+                <i style={{fontSize: '40px'}} className={this.state.action === 'Create' ? "pe-7s-add-user" : "pe-7s-ticket"}></i>
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
