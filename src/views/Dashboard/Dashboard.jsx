@@ -215,10 +215,7 @@ class Dashboard extends Component {
               />
             </div>
           </div> */}
-          <Button fill style={{position: 'absolute', right: '5%', top: '10%'}}  href={'#/newcourse'}>Create course</Button>
-          <div className="row">
-            <div className="box-shadow-effects"></div>
-          </div>
+          <Button fill style={{position: 'fixed', right: '5%', top: '10%'}}  href={'#/newcourse'}>Create course</Button>
           <div className="row">
             {
               course.map(function(eachCourse, key) {

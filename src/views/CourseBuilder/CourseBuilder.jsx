@@ -52,7 +52,7 @@ class CourseBuilder extends Component {
           <Card
             content={
               <div>
-                <Row style={{borderWidth: '1px', borderStyle: '', display: 'flex'}}>
+                <Row style={{display: 'flex'}}>
                   <Col sm={8}>
                     <Form>
                       <FormGroup controlId="courseName">
@@ -96,11 +96,11 @@ class CourseBuilder extends Component {
                       </FormGroup>
                     </Form>
                   </Col>
-                  <Col sm={4} style={{borderWidth: '1px', borderStyle: ''}}>
+                  <Col sm={4}>
                     <Form>
                       <FormGroup controlId="courseStudent">
-                        <ControlLabel>Course Student</ControlLabel>
-                          <div id="children-pane" style={{width:'100%', maxHeight:'75%',  overflow:'scroll', overflowX: 'hidden',borderWidth: '1px', borderStyle: ''}}>
+                        <ControlLabel>Course student</ControlLabel>
+                          <div id="children-pane" style={{width:'100%', maxHeight:'65%',  overflow:'scroll', overflowX: 'hidden'}}>
                             {children}
                           </div>
                       </FormGroup>
