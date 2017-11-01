@@ -6,28 +6,35 @@ import Button from 'elements/CustomButton/CustomButton.jsx'
 import {Card} from 'components/Card/Card.jsx';
 
 class CourseBuilder extends Component {
+
   state = {
     numChildren: 0
   }
   onAddChild = () => {
       this.setState({
-      numChildren: this.state.numChildren + 1
+        numChildren: this.state.numChildren + 1
       });
       var ScrollToBottom = document.getElementById("children-pane");
       ScrollToBottom.scrollTop = ScrollToBottom.scrollHeight;
   }
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      this.onAddChild()
+    }
+  }
   render(){
+
     const children = [];
     for (var i = 0; i < this.state.numChildren; i += 1) {
         children.push(
-            <Form inline key={i}>
-                <FormGroup controlId="formInlineName">
+          <Row key={i}>
+            <Col key={i} sm={10}>
+                <FormGroup key={i} controlId="formInlineName">
                     <ControlLabel>Student ID </ControlLabel>
-                    {''}
-                    <FormControl type="text" style={{marginLeft:'1%'}} />
+                    <FormControl key={i} onKeyPress={this.handleKeyPress} type="text"/>
                 </FormGroup>
-                {''}
-            </Form>
+            </Col>
+          </Row>
         );
     };
     function Choose(e) {
@@ -45,7 +52,7 @@ class CourseBuilder extends Component {
           <Card
             content={
               <div>
-                <Row style={{borderWidth: '1px', borderStyle: 'dashed', display: 'flex'}}>
+                <Row style={{borderWidth: '1px', borderStyle: '', display: 'flex'}}>
                   <Col sm={8}>
                     <Form>
                       <FormGroup controlId="courseName">
@@ -89,17 +96,17 @@ class CourseBuilder extends Component {
                       </FormGroup>
                     </Form>
                   </Col>
-                  <Col sm={4} style={{borderWidth: '1px', borderStyle: 'dashed'}}>
+                  <Col sm={4} style={{borderWidth: '1px', borderStyle: ''}}>
                     <Form>
                       <FormGroup controlId="courseStudent">
-                        <ControlLabel>Course student</ControlLabel>
-                          <div id="children-pane" style={{width:'100%', maxHeight:'65%',  overflow:'scroll', overflowX: 'hidden',borderWidth: '1px', borderStyle: 'dashed'}}>
+                        <ControlLabel>Course Student</ControlLabel>
+                          <div id="children-pane" style={{width:'100%', maxHeight:'75%',  overflow:'scroll', overflowX: 'hidden',borderWidth: '1px', borderStyle: ''}}>
                             {children}
                           </div>
                       </FormGroup>
                     </Form>
                     <div style={{position: 'absolute', bottom: '1em', right: '1em', left: '1em'}}>
-                      <Button bsSize="large" onClick={this.onAddChild} block>Add Student</Button>
+                      <Button  id='addStudent' bsSize="large" onClick={this.onAddChild} block>Add Student</Button>
                       <Button bsSize="large" block>Save</Button>
                     </div>
                   </Col>
