@@ -4,11 +4,13 @@ import {Table, Col, FormGroup, ControlLabel, FormControl, Form, Row} from 'react
 import {thWeekArray} from 'variables/Variables.jsx';
 import Button from 'elements/CustomButton/CustomButton.jsx'
 import {Card} from 'components/Card/Card.jsx';
+import SweetAlert from 'react-bootstrap-sweetalert'
 
 class CourseBuilder extends Component {
 
   state = {
-    numChildren: 0
+    numChildren: 0,
+    canShowAlert: false,
   }
   onAddChild = () => {
       this.setState({
@@ -22,6 +24,16 @@ class CourseBuilder extends Component {
       this.onAddChild()
     }
   }
+  openAlert = ()=>{
+    this.setState({
+      canShowAlert:true
+    });
+  }
+  closeAlert = ()=>{
+    this.setState({
+      canShowAlert:false
+    });
+  }
   render(){
 
     const children = [];
@@ -31,7 +43,7 @@ class CourseBuilder extends Component {
             <Col key={i} sm={10}>
                 <FormGroup key={i} controlId="formInlineName">
                     <ControlLabel>Student ID </ControlLabel>
-                    <FormControl key={i} onKeyPress={this.handleKeyPress} type="text"/>
+                    <FormControl key={i} onKeyPress={this.handleKeyPress} type="text" autoFocus/>
                 </FormGroup>
             </Col>
           </Row>
@@ -39,12 +51,11 @@ class CourseBuilder extends Component {
     };
     function Choose(e) {
         e.preventDefault();
-        console.log(e.target.style.background)
-        if(e.target.style.background==='rgb(235, 237, 227)'){
+        if(e.target.style.background === 'rgb(66, 244, 164)'){
           e.target.style.background='transparent'
           return
         }
-        e.target.style.background='#ebede3'
+        e.target.style.background='#42F4A4'
     }
     return(
       <div className="content">
@@ -56,11 +67,13 @@ class CourseBuilder extends Component {
                   <Col sm={8}>
                     <Form>
                       <FormGroup controlId="courseName">
-                        <ControlLabel>Course Name</ControlLabel>
+                        <ControlLabel>
+                          <b>Course Name</b>
+                        </ControlLabel>
                         <FormControl type="text" label="Text" placeholder="Course Name" />
                       </FormGroup>
                       <FormGroup controlId="courseTimePicker">
-                        <ControlLabel>Course time</ControlLabel>
+                        <ControlLabel><b>Course time</b></ControlLabel>
                         <Table responsive bordered striped hover>
                           <thead>
                             <tr>
@@ -87,7 +100,7 @@ class CourseBuilder extends Component {
                                       );
                                     })
                                   }
-                                  </tr>                          
+                                  </tr>
                                 )
                               })
                             }
@@ -99,7 +112,7 @@ class CourseBuilder extends Component {
                   <Col sm={4}>
                     <Form>
                       <FormGroup controlId="courseStudent">
-                        <ControlLabel>Course student</ControlLabel>
+                        <ControlLabel><b>Course student</b></ControlLabel>
                           <div id="children-pane" style={{width:'100%', maxHeight:'65%',  overflow:'scroll', overflowX: 'hidden'}}>
                             {children}
                           </div>
@@ -107,7 +120,13 @@ class CourseBuilder extends Component {
                     </Form>
                     <div style={{position: 'absolute', bottom: '1em', right: '1em', left: '1em'}}>
                       <Button  id='addStudent' bsSize="large" onClick={this.onAddChild} block>Add Student</Button>
-                      <Button bsSize="large" block>Save</Button>
+                      {<Button bsSize="large" block onClick={this.openAlert}>Save</Button>}
+                      <SweetAlert success title="Create Course Success"
+                        onConfirm={this.closeAlert}
+                        show={this.state.canShowAlert}
+                        confirmBtnBsStyle="success"  
+                       >
+                      </SweetAlert>
                     </div>
                   </Col>
                 </Row>
